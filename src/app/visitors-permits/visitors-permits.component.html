@@ -1,0 +1,200 @@
+<div class="top-section">
+    <div class="breadcrumb">
+        <a><span>خدماتي</span></a>
+        <span class="separator"> > </span>
+        <a><span>زيارة معارض الحرمين </span></a>
+        <span class="separator"> > </span>
+        <a><span class="active">تصاريحي</span></a>
+    </div> 
+    <div class="title-container">
+        <div class="title"> تصاريحي <br>
+            <p>جميع البيانات ومعلومات التصاريح الخاصة بحسابي </p>
+        </div>
+    </div> 
+</div>
+
+<div class="bottom-section">
+    <div class="card">
+        <div class="table-toolbar">
+            <div class="left-tools">
+                <div class="action-buttons">
+                    <button class="icon-btn bgOrang">
+                        <app-icon name="print"></app-icon>
+                    </button>
+                    <button class="icon-btn ">
+                        <app-icon name="filter"></app-icon> 
+                    </button>
+                    <button class="icon-btn">
+                        <app-icon name="sort"></app-icon> 
+                    </button>
+                </div> 
+                <div class="search-container">
+                    <input type="text" placeholder="بحث..." class="search-input"> 
+                </div>
+            </div>
+            <div class="right-separator"></div>
+        </div>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" class="checkbox-input">
+                        </th>
+                        <th>رقم التصريح</th>
+                        <th>نوع الزيارة</th>
+                        <th> اسم الجهة / الشخض</th>
+                        <th>تاريخ الزيارة</th>
+                        <th>وقت الزيارة </th>
+                        <th>عدد الحافلات </th>
+                        <th>حالة الحجز</th>
+                        <th>الزوار </th>
+                        <th>بطاقة دخول المعرض</th>
+                        <th>إلغاء الحجز</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of permits">
+                        <td>
+                            <input type="checkbox" class="checkbox-input">
+                        </td>
+                        <td>{{item.permitNumber}} </td>
+                        <td>{{item.visitType}}</td>
+                        <td>{{item.visitorName}}</td>
+                        <td>{{item.visitDate}}</td>
+                        <td>{{item.visitTime}}</td>
+                        <td>{{item.busCount}}</td>
+                        <td>
+                            <div class="status-badge" [ngClass]="getStatusClass(item.status)">
+                                <span class="status-dot"></span>
+                                <span class="status-text">{{item.status}}</span>
+                            </div>
+                        </td>
+                        <td> <a> بيانات الزوار</a></td>
+                        <td> <a (click)="openTicketModal(item)"> عرض التذكرة </a> </td>
+                        <td class="action-column">
+                            <div class="tooltip-wrapper">
+                                <button class="round-button">
+                                   <app-icon name="mark"></app-icon>
+                                </button>
+                                <div class="custom-tooltip" *ngIf="item.status == 'مؤكد'">
+                                    <div class="tooltip-icon status-confirmed">!</div>
+                                    <span class="tooltip-text"> يسمح بإلغاء الحجز علي ان يكون قبل الرحل بساعتين
+                                        فقط</span>
+                                </div>
+                                <div class="custom-tooltip" *ngIf="item.status == 'منتهي'">
+                                    <div class="tooltip-icon status-ended">!</div>
+                                    <span class="tooltip-text"> تم انتهاء فترة الإلغاء </span>
+                                </div>
+                            </div>
+                        </td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ticket modal -->
+ 
+<div class="modal-overlay" [class.show]="showTicketModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <span> تصريح زيارة </span>
+            <button class="close-btn" (click)="closeModal()">×</button>
+        </div>
+        <div class="modal-toolbar">
+            <div>
+                <button class="langBtnArabic"> عربي </button>
+                <button class="langBtnEnglish"> English </button>
+            </div>
+            <button class="icon-btn">
+               <app-icon  name="print"></app-icon>
+            </button> 
+        </div>
+
+        <div class="ticket-card"> 
+            <div class="ticket-header">
+                <label> تصريح زيارة </label> <br>
+                <h2> المعرض التراثي لمكتبة الحرم المكي </h2>
+            </div> 
+
+            <div class="ticket-content">
+
+                <div class="qr-section">
+                    <div class="qr-frame">
+                        <!-- QR code will be placed here -->
+                    </div>
+                    <div class="visitor-info">
+                        <label class="info-label">الاسم</label>
+                        <span class="info-value">{{selectedTicket?.visitorName}}</span>
+                    </div>
+                </div>
+
+                <div class="terms-link">
+                    <a>
+                        الشروط والأحكام
+                        <app-icon name="open"></app-icon>
+                    </a>
+                </div>
+
+            </div> 
+
+            <div class="ticket-info">
+                <div class="info-row">
+                    <div class="input-group">
+                        <label>رقم التصريح</label>
+                        <input type="text" value="{{selectedTicket?.permitNumber}}" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label>نوع الزيارة</label>
+                        <input type="text" value="{{selectedTicket?.visitType}}" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label>تاريخ الزيارة</label>
+                        <input type="text" value="{{selectedTicket?.visitDate}}" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label>وقت الزيارة</label>
+                        <input type="text" value="{{selectedTicket?.visitTime}}" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label>عدد الحافلات</label>
+                        <input type="text" value="{{selectedTicket?.busCount}}" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label>عدد الزوار</label>
+                        <input type="text" value="{{selectedTicket?.visitorsCount}}" readonly>
+                    </div>
+                </div>
+
+            </div> 
+
+            <div class="ticket-separator">
+                <app-icon name="seperator"></app-icon>
+            </div> 
+
+            <div class="ticket-footer">
+                <div class="barcode-section">
+                    <img src="./assets/images/parcode.png" alt="Barcode">
+                </div>
+
+                <div class="footer-info">
+                    <div class="location-info">
+                        <label>موقع المعرض: </label>
+                        <a href="#" class="map-link">
+                            إضغط هنا
+                            <app-icon name="pin"></app-icon>
+                        </a>
+                    </div>
+                    <div class="email-info">
+                        <label>بريد التواصل: exibit@gph.gov.sa</label>
+                    </div>
+                </div>
+
+            </div> 
+        </div>
+
+    </div>
+</div>
