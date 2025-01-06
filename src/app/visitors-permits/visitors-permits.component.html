@@ -24,12 +24,12 @@
                     <button class="icon-btn ">
                         <app-icon name="filter"></app-icon> 
                     </button>
-                    <button class="icon-btn">
+                    <button class="icon-btn" (click)="sortByDate()">
                         <app-icon name="sort"></app-icon> 
                     </button>
                 </div> 
                 <div class="search-container">
-                    <input type="text" placeholder="بحث..." class="search-input"> 
+                    <input #searchInput type="text" placeholder="بحث..." class="search-input" > 
                 </div>
             </div>
             <div class="right-separator"></div>
@@ -45,7 +45,10 @@
                         <th>رقم التصريح</th>
                         <th>نوع الزيارة</th>
                         <th> اسم الجهة / الشخض</th>
-                        <th>تاريخ الزيارة</th>
+                        <th>تاريخ الزيارة   
+                            <span *ngIf="isSorted">↑</span>
+                             <span *ngIf="!isSorted">↓</span>
+                        </th>
                         <th>وقت الزيارة </th>
                         <th>عدد الحافلات </th>
                         <th>حالة الحجز</th>
@@ -55,9 +58,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr *ngIf="permits.length === 0" class="no-results-row">
+                        <td colspan="8" class="no-results-cell">
+                          <div class="no-results-content">
+                            <i class="fas fa-search"></i>
+                            <h3>لا توجد نتائج</h3>
+                            <p>لم يتم العثور على تصاريح مطابقة لبحثك</p>
+                          </div>
+                        </td>
+                      </tr>
                     <tr *ngFor="let item of permits">
                         <td>
-                            <input type="checkbox" class="checkbox-input">
+                            <input type="checkbox" class="checkbox-input" >
                         </td>
                         <td>{{item.permitNumber}} </td>
                         <td>{{item.visitType}}</td>
@@ -198,7 +210,6 @@
                         <label>بريد التواصل: exibit@gph.gov.sa</label>
                     </div>
                 </div>
-
             </div> 
         </div>
 

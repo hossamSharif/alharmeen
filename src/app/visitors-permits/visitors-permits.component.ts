@@ -1,65 +1,78 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { fromEvent, Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { VisitorsPermitsService } from './visitors-permits.service';
 
 
-
-
-
-  
 
 @Component({
   selector: 'app-visitors-permits',
   templateUrl: './visitors-permits.component.html',
   styleUrls: ['./visitors-permits.component.scss']
 })
-export class VisitorsPermitsComponent implements OnInit {
-  
-  @ViewChild('barcode') barcodeElement!: ElementRef;
-  
-  
-  permits = [
-    {
-      permitNumber: '28374928',
-      visitType: 'معارض الحرمين',
-      visitorName: 'محمد بن محمد حسن    ',
-      visitDate: '2023-12-15',
-      visitTime: '10:00 ص',
-      busCount: 1,
-      status: 'مؤكد',
-      visitorsCount: 45
-    },
-    {
-      permitNumber: '667679839',
-      visitType: 'معارض الحرمين',
-      visitorName: 'يزن بن محمد حسن    ',
-      visitDate: '2023-12-10',
-      visitTime: '02:30 م',
-      busCount: 1,
-      status: 'منتهي',
-      visitorsCount: 15
-    },
-    {
-      permitNumber: '999488387',
-      visitType:'معارض الحرمين',
-      visitorName: 'الحارث بن محمد حسن    ',
-      visitDate: '2023-12-20',
-      visitTime: '09:00 ص',
-      busCount: 3,
-      status: 'ملغي',
-      visitorsCount: 60
-    }
-  ];
-  
-  qrCodeData: string = '';
-  qrCodeWidth: number = 135;
+export class VisitorsPermitsComponent implements OnInit { 
+  @ViewChild('barcode') barcodeElement!: ElementRef; 
+  @ViewChild('searchInput', { read: ElementRef }) searchInput!: ElementRef;
+  permits: any[] = [];
+  loading = false; 
+   
 
+  //qr
+  qrCodeData: string = '';
+  qrCodeWidth: number = 135; 
   selectedTicket : any;
   showTicketModal :boolean=false;
-  isMainChecked: boolean = false;
-  isPartiallyChecked: boolean = false;
-  constructor() { }
+  
 
-  ngOnInit(): void {
+  //sort and filter
+  isSorted: boolean = false;
+   
+  constructor(private visitorService: VisitorsPermitsService) {
+     
+   }
+
+  ngOnInit(): void { 
+    this.loadPermits();
   }
+
+
+  loadPermits() {
+    this.loading = true;
+    this.visitorService.getPermits().subscribe(data => {
+      this.permits = data;
+      this.loading = false;
+    });
+  }
+ 
+  ngAfterViewInit() {
+    fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+      map((event: any) => event.target.value),
+      debounceTime(400),
+      distinctUntilChanged(),
+      tap(() => this.loading = true),
+      switchMap(term => this.visitorService.searchPermits(term))
+    ).subscribe(results => {
+      this.permits = results;
+      this.loading = false;
+    });
+  }
+ 
+  sortByDate() {
+    if (!this.isSorted) {
+      // Sort ascending
+      this.permits.sort((a, b) => {
+        const dateA = new Date(a.visitDate);
+        const dateB = new Date(b.visitDate);
+        return dateA.getTime() - dateB.getTime();
+      });
+      this.isSorted = true;
+    } else {
+      // Reverse the order
+      this.permits.reverse();
+      this.isSorted = false;
+    }
+  }
+ 
 
   getStatusClass(status: string): string {
     switch(status.toLowerCase()) {
@@ -72,11 +85,11 @@ export class VisitorsPermitsComponent implements OnInit {
         default:
             return '';
     }
-}
-
-generateQRCode(permitNumber: string) {
-    this.qrCodeData = permitNumber;
   }
+
+  generateQRCode(permitNumber: string) {
+      this.qrCodeData = permitNumber;
+    }
 
   generateBarcode(permit: string) {
     const JsBarcode = require('jsbarcode');
@@ -89,8 +102,6 @@ generateQRCode(permitNumber: string) {
     fontSize: 14 // Optional: controls the size of text below barcode
     });
   }
- 
-
  
  openTicketModal(ticket: any) { 
   this.selectedTicket = ticket; 

@@ -238,6 +238,31 @@ body {
 
 
 
+  .no-results-row {
+    .no-results-cell {
+      text-align: center;
+      padding: 40px 0;
+    }
+  
+    .no-results-content {
+      i {
+        font-size: 24px;
+        color: #999;
+        margin-bottom: 10px;
+      }
+  
+      h3 {
+        color: #666;
+        margin-bottom: 8px;
+      }
+  
+      p {
+        color: #999;
+      }
+    }
+  }
+
+
   .terms-container {
     display: flex;
     justify-content: space-between;
@@ -247,7 +272,7 @@ body {
   }
   
   .terms-links {
-    margin-inline-start: auto;
+    //margin-inline-start: auto;
     .links-row {
       margin-bottom: 5%;
       
