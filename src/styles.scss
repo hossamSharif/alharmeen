@@ -247,6 +247,7 @@ body {
   }
   
   .terms-links {
+    margin-inline-start: auto;
     .links-row {
       margin-bottom: 5%;
       
@@ -726,7 +727,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 10px;
+    padding-bottom: 10px;
 }
 
 .qr-section {
@@ -735,18 +736,26 @@ body {
 }
 
 .qr-frame {
-    width: 120px;
-    height: 120px;
-    background-image: url('./assets/images/qrFram.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    // width: 120px;
+    // height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    .permit-number {
+      margin-top: -20px;
+      font-weight: bold;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-align: center;
+  }
 }
 
 .visitor-info {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    padding-top: 16px;
 }
 
 .info-label {
@@ -770,6 +779,7 @@ body {
     gap: 8px;
     color: #0066cc;
     text-decoration: none;
+    padding: 16px ;
 }
 
 

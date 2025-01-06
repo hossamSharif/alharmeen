@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+ 
+
+
+
+  
 
 @Component({
   selector: 'app-visitors-permits',
@@ -7,12 +12,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitorsPermitsComponent implements OnInit {
 
-
   permits = [
     {
       permitNumber: 'P-2023-001',
       visitType: 'معارض الحرمين',
-      visitorName: 'احمد بن محمد حسن    ',
+      visitorName: 'محمد بن محمد حسن    ',
       visitDate: '2023-12-15',
       visitTime: '10:00 ص',
       busCount: 1,
@@ -22,7 +26,7 @@ export class VisitorsPermitsComponent implements OnInit {
     {
       permitNumber: 'P-2023-002',
       visitType: 'معارض الحرمين',
-      visitorName: 'احمد بن محمد حسن    ',
+      visitorName: 'يزن بن محمد حسن    ',
       visitDate: '2023-12-10',
       visitTime: '02:30 م',
       busCount: 1,
@@ -30,9 +34,9 @@ export class VisitorsPermitsComponent implements OnInit {
       visitorsCount: 15
     },
     {
-      permitNumber: '50003',
+      permitNumber: 'P-2023-012',
       visitType:'معارض الحرمين',
-      visitorName: 'احمد بن محمد حسن    ',
+      visitorName: 'الحارث بن محمد حسن    ',
       visitDate: '2023-12-20',
       visitTime: '09:00 ص',
       busCount: 3,
@@ -41,6 +45,28 @@ export class VisitorsPermitsComponent implements OnInit {
     }
   ];
   
+  barcodeValue = '';
+  barcodeOptions = {
+    format: 'CODE128',
+    width: 2,
+    height: 100,
+    displayValue: true,
+    fontOptions: '',
+    font: 'monospace',
+    textAlign: 'center',
+    textPosition: 'bottom',
+    textMargin: 2,
+    fontSize: 20,
+    background: '#ffffff',
+    lineColor: '#000000',
+    margin: 10
+  };
+
+
+
+  qrCodeData: string = '';
+  qrCodeWidth: number = 135;
+
   selectedTicket : any;
   showTicketModal :boolean=false;
   isMainChecked: boolean = false;
@@ -63,12 +89,19 @@ export class VisitorsPermitsComponent implements OnInit {
     }
 }
 
+generateQRCode(permitNumber: string) {
+    this.qrCodeData = permitNumber;
+  }
 
+  generateBarcode(permitNumber:number) {
+   
+   
+  }
  
- openTicketModal(ticket: any) {
-
-  this.selectedTicket = ticket;
-  this.showTicketModal = true;
+ openTicketModal(ticket: any) { 
+  this.selectedTicket = ticket;  
+  this.generateQRCode(ticket.permitNumber);
+  this.showTicketModal = true;  
   console.log(this.selectedTicket);
 }
 

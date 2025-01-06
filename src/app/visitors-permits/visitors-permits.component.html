@@ -123,9 +123,15 @@
             <div class="ticket-content">
 
                 <div class="qr-section">
-                    <div class="qr-frame">
-                        <!-- QR code will be placed here -->
+                    <div class="qr-frame"> 
+                        <qrcode
+                        [qrdata]="qrCodeData"
+                        [width]="qrCodeWidth"
+                        [errorCorrectionLevel]="'M'">
+                      </qrcode>  
+                      <span class="permit-number">{{selectedTicket?.permitNumber}}</span>
                     </div>
+
                     <div class="visitor-info">
                         <label class="info-label">الاسم</label>
                         <span class="info-value">{{selectedTicket?.visitorName}}</span>
@@ -177,7 +183,8 @@
 
             <div class="ticket-footer">
                 <div class="barcode-section">
-                    <img src="./assets/images/parcode.png" alt="Barcode">
+                    <!-- <img src="./assets/images/parcode.png" alt="Barcode"> -->
+                    
                 </div>
 
                 <div class="footer-info">

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from './component/icon/icon.component';
-
+ 
 @NgModule({ 
   declarations: [IconComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    
     
   ],
   exports: [IconComponent]
