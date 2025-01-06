@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
- 
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
+
 
 
 
@@ -11,10 +12,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./visitors-permits.component.scss']
 })
 export class VisitorsPermitsComponent implements OnInit {
-
+  
+  @ViewChild('barcode') barcodeElement!: ElementRef;
+  
+  
   permits = [
     {
-      permitNumber: 'P-2023-001',
+      permitNumber: '28374928',
       visitType: 'معارض الحرمين',
       visitorName: 'محمد بن محمد حسن    ',
       visitDate: '2023-12-15',
@@ -24,7 +28,7 @@ export class VisitorsPermitsComponent implements OnInit {
       visitorsCount: 45
     },
     {
-      permitNumber: 'P-2023-002',
+      permitNumber: '667679839',
       visitType: 'معارض الحرمين',
       visitorName: 'يزن بن محمد حسن    ',
       visitDate: '2023-12-10',
@@ -34,7 +38,7 @@ export class VisitorsPermitsComponent implements OnInit {
       visitorsCount: 15
     },
     {
-      permitNumber: 'P-2023-012',
+      permitNumber: '999488387',
       visitType:'معارض الحرمين',
       visitorName: 'الحارث بن محمد حسن    ',
       visitDate: '2023-12-20',
@@ -45,25 +49,6 @@ export class VisitorsPermitsComponent implements OnInit {
     }
   ];
   
-  barcodeValue = '';
-  barcodeOptions = {
-    format: 'CODE128',
-    width: 2,
-    height: 100,
-    displayValue: true,
-    fontOptions: '',
-    font: 'monospace',
-    textAlign: 'center',
-    textPosition: 'bottom',
-    textMargin: 2,
-    fontSize: 20,
-    background: '#ffffff',
-    lineColor: '#000000',
-    margin: 10
-  };
-
-
-
   qrCodeData: string = '';
   qrCodeWidth: number = 135;
 
@@ -93,13 +78,23 @@ generateQRCode(permitNumber: string) {
     this.qrCodeData = permitNumber;
   }
 
-  generateBarcode(permitNumber:number) {
-   
-   
+  generateBarcode(permit: string) {
+    const JsBarcode = require('jsbarcode');
+    JsBarcode(this.barcodeElement.nativeElement, permit, {
+    format: 'CODE39',
+    displayValue: false, // Hide the text below the barcode
+    width: 4, // Controls the width of each bar
+    height: 60, // Optional: you can also control height
+    margin: 10, // Optional: adds margin around the barcode
+    fontSize: 14 // Optional: controls the size of text below barcode
+    });
   }
  
+
+ 
  openTicketModal(ticket: any) { 
-  this.selectedTicket = ticket;  
+  this.selectedTicket = ticket; 
+  this.generateBarcode(ticket.permitNumber); 
   this.generateQRCode(ticket.permitNumber);
   this.showTicketModal = true;  
   console.log(this.selectedTicket);
