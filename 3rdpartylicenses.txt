@@ -74,6 +74,9 @@ THE SOFTWARE.
 encode-utf8
 MIT
 
+jsbarcode
+MIT
+
 rxjs
 Apache-2.0
                                Apache License
