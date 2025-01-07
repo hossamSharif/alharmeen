@@ -66,7 +66,7 @@
                             <p>لم يتم العثور على تصاريح مطابقة لبحثك</p>
                           </div>
                         </td>
-                      </tr>
+                    </tr>
                     <tr *ngFor="let item of permits">
                         <td class="checkbox-column">
                             <input class="checkbox-input" type="checkbox" >
@@ -110,7 +110,7 @@
 
 <!-- ticket modal -->
  
-<div class="modal-overlay" [class.show]="showTicketModal" (click)="closeModal()" >
+<div class="modal-overlay" [class.show]="showTicketModal" (click)="closeModal()"  >
     <div class="modal-content" (click)="$event.stopPropagation()">
         <div class="modal-header">
             <span> تصريح زيارة </span>
@@ -126,14 +126,13 @@
             </button> 
         </div>
 
-        <div class="ticket-card" > 
+        <div class="ticket-card"  id="print-ticket"> 
             <div class="ticket-header">
                 <label> تصريح زيارة </label> <br>
                 <h2> المعرض التراثي لمكتبة الحرم المكي </h2>
             </div> 
 
             <div class="ticket-content" >
-
                 <div class="qr-section">
                     <div class="qr-frame"> 
                         <qrcode
@@ -150,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="terms-link">
+                <div class="terms-link"   [ngClass]="{'d-none': printMode === true , 'terms-link': printMode === false }">
                     <a>
                         الشروط والأحكام
                         <app-icon name="open"></app-icon>
@@ -163,30 +162,29 @@
                 <div class="info-row">
                     <div class="input-group">
                         <label>رقم التصريح</label>
-                        <input type="text" value="{{selectedTicket?.permitNumber}}" readonly>
+                        <input type="text" value="{{selectedTicket?.permitNumber}}" >
                     </div>
                     <div class="input-group">
                         <label>نوع الزيارة</label>
-                        <input type="text" value="{{selectedTicket?.visitType}}" readonly>
+                        <input type="text" value="{{selectedTicket?.visitType}}" >
                     </div>
                     <div class="input-group">
                         <label>تاريخ الزيارة</label>
-                        <input type="text" value="{{selectedTicket?.visitDate}}" readonly>
+                        <input type="text" value="{{selectedTicket?.visitDate}}" >
                     </div>
                     <div class="input-group">
                         <label>وقت الزيارة</label>
-                        <input type="text" value="{{selectedTicket?.visitTime}}" readonly>
+                        <input type="text" value="{{selectedTicket?.visitTime}}" > 
                     </div>
                     <div class="input-group">
                         <label>عدد الحافلات</label>
-                        <input type="text" value="{{selectedTicket?.busCount}}" readonly>
+                        <input type="text" value="{{selectedTicket?.busCount}}" >
                     </div>
                     <div class="input-group">
                         <label>عدد الزوار</label>
-                        <input type="text" value="{{selectedTicket?.visitorsCount}}" readonly>
+                        <input type="text" value="{{selectedTicket?.visitorsCount}}" >
                     </div>
                 </div>
-
             </div> 
 
             <div class="ticket-separator">
@@ -199,7 +197,7 @@
                 </div>
 
                 <div class="footer-info">
-                    <div class="location-info">
+                    <div  [ngClass]="{'d-none': printMode === true , 'location-info': printMode === false }" >
                         <label>موقع المعرض: </label>
                         <a href="#" class="map-link">
                             إضغط هنا
@@ -210,7 +208,6 @@
                         <label>بريد التواصل: exibit@gph.gov.sa</label>
                     </div>
                 </div>
-                
             </div> 
         </div>
 

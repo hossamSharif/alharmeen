@@ -712,8 +712,6 @@ body {
 }
 
 
-
-
 .close-btn {
     background: none;
     border: none;
@@ -728,7 +726,6 @@ body {
     border: 2px solid #d9d9d9;
     border-radius: 8px;
     margin: 12px 0px 12px 0px;
-
 }
 
 .ticket-header { 
@@ -897,12 +894,15 @@ body {
     color: #0066cc;
     text-decoration: none;
 }
+
 .email-info {
     text-align: left;
     color: black;
 }
 
-
+.d-none{
+  display: none !important;
+}
 
   /* Responsive Styles */
   @media screen and (max-width: 1024px) {
@@ -982,6 +982,15 @@ body {
       display: none;
     }
   
+  }
+  
+  @media print {
+    .modal-header,
+    .modal-toolbar,
+    .terms-link,
+    .location-info {
+      display: none !important;
+    }
   }
 
  

@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { VisitorsPermitsService } from './visitors-permits.service';
-
+import html2canvas from 'html2canvas';
 
 
 @Component({
@@ -26,6 +26,8 @@ export class VisitorsPermitsComponent implements OnInit {
 
   //sort and filter
   isSorted: boolean = false;
+
+  printMode: boolean = false;
    
   constructor(private visitorService: VisitorsPermitsService) {
      
@@ -178,50 +180,287 @@ export class VisitorsPermitsComponent implements OnInit {
   }
   
   
+
   printTicket() {
-    const ticketContent = document.getElementById('ticket-modal-content');
-    if (ticketContent) {
-      const printWindow = window.open('', '', 'width=600,height=600');
-      printWindow?.document.write('<html><head><title>Visitor Permit</title>');
+    // Set print mode first
+    this.printMode = true;
+    
+    // Give time for Angular to update the DOM with hidden elements
+    setTimeout(() => {
+        const ticketElement = document.getElementById('print-ticket');
+        if (ticketElement) {
+            html2canvas(ticketElement).then(canvas => {
+                const printWindow = window.open('', '', 'width=600,height=600');
+                printWindow?.document.write(`
+                    <html>
+                    <head>
+                        <title>تصريح زيارة</title>
+                        <style>
+                            body { margin: 0; display: flex; justify-content: center; }
+                            img { max-width: 75%; height: 70%; }
+                        </style>
+                    </head>
+                    <body>
+                        <img src="${canvas.toDataURL('image/png')}" />
+                    </body>
+                    </html>
+                `);
+                printWindow?.document.close();
+                
+                printWindow?.addEventListener('load', () => {
+                    printWindow?.print();
+                    this.printMode = false;
+                });
+            });
+        }
+    }, 100); // Small delay to ensure DOM updates
+}
+
+
+   
+//   printTicket() {
+//     console.log("Printing ticket...");
+//     const ticketContent = document.getElementById('ticket-modal-content');
+//     if (ticketContent) {
+//       const printWindow = window.open('', '', 'width=600,height=600');
+//       printWindow?.document.write('<html><head><title>تصريح زيارة</title>');
       
-      // Add print styles
-      printWindow?.document.write(`
-        <style>
-          .ticket-container {
-            padding: 20px;
-            max-width: 500px;
-            margin: 0 auto;
-            direction: rtl;
-          }
-          .qr-section {
-            text-align: center;
-            margin: 20px 0;
-          }
-          .permit-details {
-            margin: 15px 0;
-          }
-          .permit-details div {
-            margin: 8px 0;
-          }
-          .barcode-section {
-            text-align: center;
-            margin: 20px 0;
-          }
-          @media print {
-            .no-print {
-              display: none;
-            }
-          }
-        </style>
-      `);
+//       printWindow?.document.write(`
+// <style>    
+//     .modal-overlay {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     background-color: rgba(0, 0, 0, 0.5);
+//     display: none;
+//     justify-content: center;
+//     align-items: center;
+//     z-index: 1000;
+//     direction: rtl;
+// }
+
+// .modal-overlay.show {
+//     display: flex;
+// }
+
+// .modal-content {
+//     height: 100%;
+//     overflow-y: auto;
+//     background: white;
+//     border-radius: 12px;
+//     width: 90%;
+//     max-width: 580px;
+//     padding: 24px;
+//     position: relative;
+//     padding: 10px 24px 10px 24px;
+//     direction: rtl;
+// }
+
+// .modal-header,
+// .modal-toolbar,
+// .terms-link,
+// .location-info
+//   {
+//     display: none;   
+//  }
+
+ 
+
+//   .ticket-card {
+//     display: flex;
+//     flex-direction:column; 
+//     border: 2px solid #d9d9d9;
+//     border-radius: 8px;
+//     margin: 12px 0px 12px 0px;
+//   }
+
+// .ticket-header { 
+//     padding: 16px; 
+//     background-image: url('./assets/images/pattern.png') ,  linear-gradient(to left, rgb(1 0 9) 0%, rgb(16 0 0) 50%, rgb(155 116 9) 146%);
+//     background-position: center;
+//     border-top-left-radius: 10px;
+//     border-top-right-radius: 10px;
+//     h2{
+//         color: #FFFFFF;
+//     }
+//     label{
+//         color: #cab6b6;
+//     }
+// }
+
+ 
+
+//  //qr code  
+//  .ticket-content {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: flex-start;
+//     padding-bottom: 5px;
+// }
+
+// .qr-section {
+//     display: flex;
+//     gap: 5px;
+// }
+
+// .qr-frame {
+//     // width: 120px;
+//     // height: 120px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+  
+//     .permit-number {
+//       margin-top: -20px;
+//       font-weight: bold;
+//       font-size: 14px;
+//       letter-spacing: 1px;
+//       text-align: center;
+//   }
+// }
+
+// .visitor-info {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 8px;
+//     padding-top: 16px;
+// }
+
+// .info-label {
+//     color: #666;
+//     font-size: 14px;
+// }
+
+// .info-value {
+//     color: #000;
+//     font-size: 16px;
+//     font-weight: 500;
+// }
+
+ 
+
+ 
+
+
+// //ticket info 
+// .ticket-info {
+//     margin-top: 12px;
+//     width: 100%;
+// }
+
+// .info-row {
+//     width: 95%;
+//     padding: 0px 12px 0px 12px;
+//     display: flex;
+//     justify-content: space-between;
+//     flex-wrap: wrap;
+//     gap: 20px;
+//     margin-bottom: 15px;
+// }
+
+// .input-group {
+//     flex: 1;
+//     display: flex;
+//     flex-direction: column;
+//     gap: 8px;
+//     width: 25%;
+// }
+
+// .input-group label {
+//     color: #090000;
+//     font-size: 14px;
+//     text-align: right;
+    
+// }
+
+// .input-group input {
+//     padding: 8px 12px;
+//     border-radius: 5px;
+//     border: 1px solid #ccc;
+//     font-size: 14px;
+//     text-align: right; 
+//     color: black;
+// }
+ 
+//  .ticket-separator { 
+//   margin-right: -20px; 
+//   img{
+//     width: 100%;
+//   }
+ 
+//  }
+
+ 
+ 
+
+// // footer ticket 
+// .ticket-footer {
+//  padding-bottom: 12px;
+// }
+
+// .barcode-section {
+//     display: flex;
+//     justify-content: center; 
+// }
+
+// .barcode-section img {
+//    width: 100%;
+// }
+
+// .footer-info {
+//        display: flex ;
+//         justify-content: space-between;
+//         align-items: center;
+//         padding-top: 5px;
+//         margin: 0 28px 20px 10px;
+//         width: 90%
+// }
+
+ 
+
+ 
+// .email-info {
+//     text-align: center;
+//     color: black;
+// }
+
+//           @media print {
+//             body {
+//               margin: 0;
+//               padding: 0;
+//             }
+//             .ticket-container {
+//               width: 100%;
+//               max-width: 500px;
+//             }
+//             .no-print {
+//               display: none;
+//             }
+//           }
+//         </style>
+//       `);
       
-      printWindow?.document.write('</head><body>');
-      printWindow?.document.write(ticketContent.outerHTML);
-      printWindow?.document.write('</body></html>');
-      printWindow?.document.close();
-      printWindow?.print();
-    }
-  }
+//       printWindow?.document.write('</head><body>');
+      
+//       printWindow?.document.write(`
+//         <div class="ticket-container">
+//           ${ticketContent.innerHTML}
+//         </div>
+//       `);
+//       printWindow?.document.write('</body></html>');
+//       printWindow?.document.close();
+      
+//       // Wait for images to load before printing
+//       printWindow?.addEventListener('load', () => {
+//         setTimeout(() => {
+//           printWindow?.print();
+//         }, 500);
+//       });
+//     }
+//   }
+
   
 
   generateQRCode(permitNumber: string) {
