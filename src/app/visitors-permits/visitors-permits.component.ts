@@ -72,8 +72,7 @@ export class VisitorsPermitsComponent implements OnInit {
       this.isSorted = false;
     }
   }
- 
-
+  
   getStatusClass(status: string): string {
     switch(status.toLowerCase()) {
         case 'مؤكد':
@@ -86,6 +85,144 @@ export class VisitorsPermitsComponent implements OnInit {
             return '';
     }
   }
+
+  printPermitsTable() {
+    const printContent = document.getElementById('permits-table');
+    if (printContent) {
+      const windowPrint = window.open('', '', 'width=900,height=650');
+      windowPrint?.document.write('<html><head><title>تقرير التصاريح</title>');
+      
+      windowPrint?.document.write(`
+        <style>
+          body { 
+            direction: rtl;
+            font-family: Arial, sans-serif;
+          }
+          .report-header {
+            text-align: center;
+            margin-bottom: 30px;
+          }
+          .main-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+          }
+          .sub-title {
+            font-size: 16px;
+            color: #666;
+          }
+          table { 
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+          }
+          th, td { 
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: right;
+          }
+          th {
+            background-color: #f5f5f5;
+          }
+          .report-footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+          }
+          .print-date {
+            color: #666;
+            font-size: 14px;
+          }
+          .actions-column{
+            display: none !important;
+          }
+          .checkbox-column{
+              display: none !important;	
+          }
+            
+        </style>
+      `);
+      
+      windowPrint?.document.write('</head><body>');
+      
+      // Add Header
+      windowPrint?.document.write(`
+        <div class="report-header">
+          <h1 class="main-title">تقرير تصاريح الزوار</h1>
+          <div class="sub-title">معارض الحرمين</div>
+        </div>
+      `);
+      
+      // Modify and add table
+      const tableHTML = printContent.outerHTML;
+      // const modifiedTable = tableHTML
+      //   .replace(/<th class="checkbox-column".*?<\/th>/g, '')
+      //   .replace(/<td class="checkbox-column".*?<\/td>/g, '')
+      //   .replace(/<td class="actions-column".*?<\/td>/g, '')
+      //   .replace(/<th class="actions-column".*?<\/th>/g, '');
+      
+      windowPrint?.document.write(tableHTML);
+      
+      // Add Footer
+      windowPrint?.document.write(`
+        <div class="report-footer">
+          <div class="print-date">تاريخ الطباعة: ${new Date().toLocaleDateString('ar-SA')}</div>
+        </div>
+      `);
+      
+      windowPrint?.document.write('</body></html>');
+      windowPrint?.document.close();
+      windowPrint?.print();
+    }
+  }
+  
+  
+  printTicket() {
+    const ticketContent = document.getElementById('ticket-modal-content');
+    if (ticketContent) {
+      const printWindow = window.open('', '', 'width=600,height=600');
+      printWindow?.document.write('<html><head><title>Visitor Permit</title>');
+      
+      // Add print styles
+      printWindow?.document.write(`
+        <style>
+          .ticket-container {
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+            direction: rtl;
+          }
+          .qr-section {
+            text-align: center;
+            margin: 20px 0;
+          }
+          .permit-details {
+            margin: 15px 0;
+          }
+          .permit-details div {
+            margin: 8px 0;
+          }
+          .barcode-section {
+            text-align: center;
+            margin: 20px 0;
+          }
+          @media print {
+            .no-print {
+              display: none;
+            }
+          }
+        </style>
+      `);
+      
+      printWindow?.document.write('</head><body>');
+      printWindow?.document.write(ticketContent.outerHTML);
+      printWindow?.document.write('</body></html>');
+      printWindow?.document.close();
+      printWindow?.print();
+    }
+  }
+  
 
   generateQRCode(permitNumber: string) {
       this.qrCodeData = permitNumber;
@@ -103,18 +240,18 @@ export class VisitorsPermitsComponent implements OnInit {
     });
   }
  
- openTicketModal(ticket: any) { 
-  this.selectedTicket = ticket; 
-  this.generateBarcode(ticket.permitNumber); 
-  this.generateQRCode(ticket.permitNumber);
-  this.showTicketModal = true;  
-  console.log(this.selectedTicket);
-}
+  openTicketModal(ticket: any) { 
+    this.selectedTicket = ticket; 
+    this.generateBarcode(ticket.permitNumber); 
+    this.generateQRCode(ticket.permitNumber);
+    this.showTicketModal = true;  
+    console.log(this.selectedTicket);
+  }
 
-closeModal() {
-  this.showTicketModal = false;
-  this.selectedTicket = null;
-}
+  closeModal() {
+    this.showTicketModal = false;
+    this.selectedTicket = null;
+  }
 
  
 }

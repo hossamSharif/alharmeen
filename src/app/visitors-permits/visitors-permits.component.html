@@ -18,7 +18,7 @@
         <div class="table-toolbar">
             <div class="left-tools">
                 <div class="action-buttons">
-                    <button class="icon-btn bgOrang">
+                    <button class="icon-btn bgOrang" (click)="printPermitsTable()">
                         <app-icon name="print"></app-icon>
                     </button>
                     <button class="icon-btn ">
@@ -35,11 +35,11 @@
             <div class="right-separator"></div>
         </div>
 
-        <div class="table-container">
-            <table class="data-table">
+        <div class="table-container" >
+            <table id="permits-table"  class="data-table">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="checkbox-column">
                             <input type="checkbox" class="checkbox-input">
                         </th>
                         <th>رقم التصريح</th>
@@ -52,9 +52,9 @@
                         <th>وقت الزيارة </th>
                         <th>عدد الحافلات </th>
                         <th>حالة الحجز</th>
-                        <th>الزوار </th>
-                        <th>بطاقة دخول المعرض</th>
-                        <th>إلغاء الحجز</th>
+                        <th class="actions-column">الزوار </th>
+                        <th class="actions-column">بطاقة دخول المعرض</th>
+                        <th class="actions-column">إلغاء الحجز</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,8 +68,8 @@
                         </td>
                       </tr>
                     <tr *ngFor="let item of permits">
-                        <td>
-                            <input type="checkbox" class="checkbox-input" >
+                        <td class="checkbox-column">
+                            <input class="checkbox-input" type="checkbox" >
                         </td>
                         <td>{{item.permitNumber}} </td>
                         <td>{{item.visitType}}</td>
@@ -83,9 +83,9 @@
                                 <span class="status-text">{{item.status}}</span>
                             </div>
                         </td>
-                        <td> <a> بيانات الزوار</a></td>
-                        <td> <a (click)="openTicketModal(item)"> عرض التذكرة </a> </td>
-                        <td class="action-column">
+                        <td class="actions-column"> <a> بيانات الزوار</a></td>
+                        <td class="actions-column"> <a (click)="openTicketModal(item)"> عرض التذكرة </a> </td>
+                        <td class="actions-column">
                             <div class="tooltip-wrapper">
                                 <button class="round-button">
                                    <app-icon name="mark"></app-icon>
@@ -110,7 +110,7 @@
 
 <!-- ticket modal -->
  
-<div class="modal-overlay" [class.show]="showTicketModal" (click)="closeModal()">
+<div class="modal-overlay" [class.show]="showTicketModal" (click)="closeModal()" >
     <div class="modal-content" (click)="$event.stopPropagation()">
         <div class="modal-header">
             <span> تصريح زيارة </span>
@@ -121,18 +121,18 @@
                 <button class="langBtnArabic"> عربي </button>
                 <button class="langBtnEnglish"> English </button>
             </div>
-            <button class="icon-btn">
+            <button class="icon-btn" (click)="printTicket()">
                <app-icon  name="print"></app-icon>
             </button> 
         </div>
 
-        <div class="ticket-card"> 
+        <div class="ticket-card" > 
             <div class="ticket-header">
                 <label> تصريح زيارة </label> <br>
                 <h2> المعرض التراثي لمكتبة الحرم المكي </h2>
             </div> 
 
-            <div class="ticket-content">
+            <div class="ticket-content" >
 
                 <div class="qr-section">
                     <div class="qr-frame"> 
@@ -210,6 +210,7 @@
                         <label>بريد التواصل: exibit@gph.gov.sa</label>
                     </div>
                 </div>
+                
             </div> 
         </div>
 
