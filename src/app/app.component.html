@@ -5,42 +5,110 @@
 
 <!-- Sidebar for Mobile -->
 <div class="sidebar" [class.active]="isSidebarOpen">
-  <div class="sidebar-content">
-    <!-- Main Navigation Links -->
-    <img alt="Alharamain Logo" src="./assets/images/Alharamain.png" />
+  <div class="sidebar-header">
+    <img alt="Alharamain Logo" src="./assets/images/AlharamainW.png" />
+     
+  </div>
 
+  <div class="sidebar-content"> 
     <nav class="sidebar-nav">
-      <div class="nav-link">
-        <a routerLink=""><strong>خدماتي</strong></a>
+      <div class="nav-link"  [ngClass]="{'active': department === 'myServices'}"  (click)="activeDeparment('myServices')">
+        <a routerLink="">
+          <strong>خدماتي</strong>
+        </a>
       </div>
-      <div class="nav-link">
-        <a routerLink="/Permits"><strong>تصريحاتي</strong></a>
+      <div class="nav-link" [ngClass]="{'active': department === 'myPermits'}"  (click)="activeDeparment('myPermits')">
+        <a routerLink="/Permits">
+          <strong>تصريحاتي</strong>
+        </a>
       </div>
-      <div class="nav-link">
-        <a routerLink=""><strong>معاملاتي</strong></a>
+      <div class="nav-link" [ngClass]="{'active': department === 'myTransactions'}" (click)="activeDeparment('myTransactions')" >
+        <a routerLink="">
+          <strong>معاملاتي</strong>
+        </a>
       </div>
     </nav>
 
     <!-- Icon Navigation -->
     <nav class="sidebar-icons">
-      <div class="nav-link">
-        <a routerLink=""><app-icon name="language"></app-icon></a>
+      <div class="nav-link" [ngClass]="{'active':  activePopover === 'langauge'}" (click)="togglePopover($event, 'langauge')" >
+        <a routerLink=""> 
+          <app-icon name="language"></app-icon>
+          <span>اللغة</span>
+        </a>
+        <div class="popover langauge-popover" [ngClass]="{'show': activePopover === 'langauge'}">
+          <button class="popover-btn" [ngClass]="{'active': currentLang === 'ar'}" (click)="switchLanguage('ar')">العربية</button>
+          <button class="popover-btn" [ngClass]="{'active': currentLang === 'en'}" (click)="switchLanguage('en')">English</button>
+        </div>
       </div>
-      <div class="nav-link">
-        <a routerLink=""><app-icon name="notifications"></app-icon></a>
+  
+      <div class="nav-link" [ngClass]="{'active':  activePopover === 'notifications'}" (click)="togglePopover($event, 'notifications')">
+        <a routerLink="" > 
+          <app-icon name="notifications"></app-icon> 
+          <span>الإشعارات</span>
+        </a>
+        <div class="popover notifications-popover" [ngClass]="{'show': activePopover === 'notifications'}">
+         
+          <div class="notification-item">
+            <p>تم قبول طلب التصريح</p>
+            <span class="time">منذ ساعتين</span>
+          </div>
+          <div class="notification-item">
+            <p>تم تحديث حالة الطلب</p>
+            <span class="time">منذ 3 ساعات</span>
+          </div>
+        </div>
       </div>
-      <div class="nav-link">
-        <a routerLink=""><app-icon name="search"></app-icon></a>
+  
+      <div class="nav-link"  [ngClass]="{'active':  activePopover === 'search'}" (click)="togglePopover($event, 'search')">
+        <a routerLink=""> 
+          <app-icon name="search"></app-icon> 
+          <span>البحث</span>
+        </a>
+        <div class="popover search-popover" [ngClass]="{'show': activePopover === 'search'}">
+          <div class="search-container">
+            <input type="text" placeholder="ابحث هنا...">
+            <button class="search-btn">
+              <app-icon name="search"></app-icon>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="nav-link">
-        <a routerLink=""><app-icon name="person"></app-icon></a>
+  
+      <div class="nav-link"  [ngClass]="{'active':  activePopover === 'profile'}"  (click)="togglePopover($event, 'profile')">
+        <a routerLink="" > 
+          <app-icon name="person"></app-icon> 
+          <span>  <label>الملف الشخصي</label> </span>
+        </a> 
+        <div class="popover profile-popover" [ngClass]="{'show': activePopover === 'profile'}">
+          
+          <div class="profile-menu">
+            <button class="popover-btn">الملف الشخصي</button>
+            <button class="popover-btn">تغيير كلمة المرور</button>
+            <button class="popover-btn">تسجيل الخروج</button>
+          </div>
+        </div>
       </div>
-      <div class="nav-link">
-        <a routerLink=""><app-icon name="settings"></app-icon></a>
+  
+      <div class="nav-link"  [ngClass]="{'active':  activePopover === 'settings'}" (click)="togglePopover($event, 'settings')"> 
+        <a routerLink=""> 
+          <app-icon name="settings"></app-icon>
+          <span>الإعدادات</span>
+        </a>
+        
+        <!-- <div class="popover settings-popover" [ngClass]="{'show': activePopover === 'settings'}">
+          
+          <div class="profile-menu">
+            <button class="popover-btn">   </button>
+            <button class="popover-btn">     </button>
+            <button class="popover-btn">   </button>
+          </div>
+        </div> -->
       </div>
     </nav>
 
   </div>
+
 </div>
 
 <!-- Original Toolbar with Media Query -->
@@ -48,18 +116,18 @@
 <div class="toolbar" dir="rtl" role="banner">
   <img alt="Alharamain Logo" src="./assets/images/Alharamain.png" /> 
 
-  <nav class="navigation-menu">
-    <div class="nav-link">
+  <nav class="navigation-menu" >
+    <div class="nav-link"  [ngClass]="{'active': department === 'myServices'}"  (click)="activeDeparment('myServices')">
       <a routerLink="">
         <strong>خدماتي</strong>
       </a>
     </div>
-    <div class="nav-link active">
+    <div class="nav-link" [ngClass]="{'active': department === 'myPermits'}"  (click)="activeDeparment('myPermits')">
       <a routerLink="/Permits">
         <strong>تصريحاتي</strong>
       </a>
     </div>
-    <div class="nav-link">
+    <div class="nav-link" [ngClass]="{'active': department === 'myTransactions'}" (click)="activeDeparment('myTransactions')" >
       <a routerLink="">
         <strong>معاملاتي</strong>
       </a>
@@ -69,33 +137,75 @@
   <div class="spacer"></div> 
 
   <nav class="navigation-menu">
-    <div class="nav-link">
-      <a routerLink="">
+    <div class="nav-link" [ngClass]="{'active':  activePopover === 'langauge'}" (click)="togglePopover($event, 'langauge')" >
+      <a routerLink="" >
         <app-icon name="language"></app-icon>
       </a>
+      <div class="popover langauge-popover" [ngClass]="{'show': activePopover === 'langauge'}">
+        <button class="popover-btn" [ngClass]="{'active': currentLang === 'ar'}" (click)="switchLanguage('ar')">العربية</button>
+        <button class="popover-btn" [ngClass]="{'active': currentLang === 'en'}" (click)="switchLanguage('en')">English</button>
+      </div>
     </div>
-    <div class="nav-link">
-      <a routerLink="">
-        <app-icon name="notifications"></app-icon>
-      </a>
-    </div>
-    <div class="nav-link">
-      <a routerLink="">
-        <app-icon name="search"></app-icon>
-      </a>
-    </div>
-    <div class="nav-link active">
-      <a routerLink="">
-        <app-icon name="person"></app-icon>
-      </a>
-    </div>
-    <div class="nav-link">
 
+    <div class="nav-link" [ngClass]="{'active':  activePopover === 'notifications'}" (click)="togglePopover($event, 'notifications')">
+      <a routerLink=""  >
+        <app-icon name="notifications"></app-icon> 
+      </a>
+      <div class="popover notifications-popover" [ngClass]="{'show': activePopover === 'notifications'}">
+        <h3>الإشعارات</h3>
+        <div class="notification-item">
+          <p>تم قبول طلب التصريح</p>
+          <span class="time">منذ ساعتين</span>
+        </div>
+        <div class="notification-item">
+          <p>تم تحديث حالة الطلب</p>
+          <span class="time">منذ 3 ساعات</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-link"  [ngClass]="{'active':  activePopover === 'search'}" (click)="togglePopover($event, 'search')">
+      <a routerLink=""  >
+        <app-icon name="search"></app-icon> 
+      </a>
+      <div class="popover search-popover" [ngClass]="{'show': activePopover === 'search'}">
+        <div class="search-container">
+          <input type="text" placeholder="ابحث هنا...">
+          <button class="search-btn">
+            <app-icon name="search"></app-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-link"  [ngClass]="{'active':  activePopover === 'profile'}"  (click)="togglePopover($event, 'profile')">
+      <a routerLink="" >
+        <app-icon name="person"></app-icon> 
+      </a>
+      <div class="popover profile-popover" [ngClass]="{'show': activePopover === 'profile'}">
+        
+        <div class="profile-menu">
+          <button class="popover-btn">الملف الشخصي</button>
+          <button class="popover-btn">تغيير كلمة المرور</button>
+          <button class="popover-btn">تسجيل الخروج</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-link"  [ngClass]="{'active':  activePopover === 'settings'}" (click)="togglePopover($event, 'settings')"> 
       <a routerLink="">
         <app-icon name="settings"></app-icon>
       </a>
+      <div class="popover settings-popover" [ngClass]="{'show': activePopover === 'settings'}">
+        
+        <div class="profile-menu">
+          <button class="popover-btn">   </button>
+          <button class="popover-btn">     </button>
+          <button class="popover-btn">   </button>
+        </div>
+      </div>
     </div>
-  </nav> 
+  </nav>  
 </div>
 
 
