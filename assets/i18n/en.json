@@ -1,0 +1,118 @@
+{
+    "NAV": {
+        "SERVICES": "My Services",
+        "PERMITS": "My Permits",
+        "TRANSACTIONS": "My Transactions"
+    },
+    "HEADER": {
+        "LANGUAGE": "Language",
+        "NOTIFICATIONS": "Notifications",
+        "SEARCH": "Search",
+        "PROFILE": "Profile",
+        "SETTINGS": "Settings",
+        "SEARCH_PLACEHOLDER": "Search here...",
+        "NOTIFICATIONS_TITLE": "Notifications",
+        "NOTIFICATION_1": "Permit request accepted",
+        "NOTIFICATION_2": "Request status updated",
+        "TIME_AGO_1": "2 hours ago",
+        "TIME_AGO_2": "3 hours ago",
+        "PROFILE_MENU": {
+            "VIEW_PROFILE": "View Profile",
+            "CHANGE_PASSWORD": "Change Password",
+            "LOGOUT": "Logout"
+        }
+    },
+    "FOOTER": {
+        "ABOUT": {
+            "TITLE": "About The Presidency",
+            "ABOUT_PORTAL": "About Portal",
+            "USER_GUIDE": "User Guide",
+            "NEWS": "News",
+            "EVENTS": "Events"
+        },
+        "IMPORTANT_LINKS": {
+            "TITLE": "Important Links",
+            "HARAMAIN_AUTHORITY": "General Authority for the Care of the Two Holy Mosques",
+            "HARAMAIN_APP": "Haramain App",
+            "HAJJ_MINISTRY": "Ministry of Hajj and Umrah",
+            "NUSK_PLATFORM": "Nusk Platform",
+            "NATIONAL_PLATFORM": "Unified National Platform",
+            "DIGITAL_GOVERNANCE": "Digital Governance Authority",
+            "VISION_2030": "Saudi Vision 2030"
+        },
+        "SUPPORT": {
+            "TITLE": "Technical Support",
+            "CONTACT_US": "Contact Us",
+            "COMPLAINTS": "Complaints and Suggestions",
+            "SERVICE_AGREEMENT": "Service Level Agreement",
+            "NEWSLETTER": "Subscribe to Newsletter"
+        },
+        "CONTACT": {
+            "TITLE": "Contact Us",
+            "ACCESSIBILITY": "Accessibility Tools"
+        },
+        "TERMS": {
+            "PRIVACY": "Privacy Policy",
+            "TERMS_OF_USE": "Terms of Use",
+            "SITEMAP": "Site Map",
+            "COPYRIGHT": "All Rights Reserved © 2024 Presidency of the Two Holy Mosques"
+        }
+    },
+    "PERMITS_TABLE": {
+          "PERMIT_NUMBER": "Permit Number",
+          "VISIT_TYPE": "Visit Type",
+          "VISITOR_NAME": "Entity/Person Name",
+          "VISIT_DATE": "Visit Date",
+          "VISIT_TIME": "Visit Time",
+          "BUS_COUNT": "Bus Count",
+          "STATUS": "Booking Status",
+          "VISITORS": "Visitors",
+          "ENTRY_CARD": "Exhibition Entry Card",
+          "CANCEL_BOOKING": "Cancel Booking",
+          "VISITOR_DATA": "Visitor Data",
+          "VIEW_TICKET": "View Ticket",
+          "CANCEL_NOTE": "Booking can be cancelled only up to 2 hours before the trip",
+          "CANCEL_ENDED": "Cancellation period has ended",
+           "NO_PERMITS": "No permits",
+           "NO_PERMITS_DESC": "No permits found matching your search"
+    }, 
+  "BREADCRUMB": {
+    "SERVICES": "My Services",
+    "EXHIBITION_VISIT": "Haramain Exhibition Visit",
+    "MY_PERMITS": "My Permits"
+  },
+  "PAGE_TITLE": {
+    "PERMITS": "My Permits",
+    "SUBTITLE": "All permit data and information related to my account"
+  },
+  "TOOLBAR": {
+    "SEARCH": "Search...",
+    "PRINT": "Print",
+    "FILTER": "Filter",
+    "SORT": "Sort"
+  },
+  "TICKET_MODAL": {
+    "TITLE": "Visit Permit",
+    "EXHIBITION_NAME": "Heritage Exhibition of the Grand Mosque Library",
+    "LANGUAGE": {
+      "ARABIC": "Arabic",
+      "ENGLISH": "English"
+    },
+    "VISITOR_INFO": {
+      "NAME": "Name",
+      "PERMIT_NUMBER": "Permit Number",
+      "VISIT_TYPE": "Visit Type",
+      "VISIT_DATE": "Visit Date",
+      "VISIT_TIME": "Visit Time",
+      "BUS_COUNT": "Number of Buses",
+      "VISITORS_COUNT": "Number of Visitors"
+    },
+    "FOOTER": {
+      "LOCATION": "Exhibition Location",
+      "CLICK_HERE": "Click Here",
+      "CONTACT_EMAIL": "Contact Email",
+      "TERMS": "Terms and Conditions"
+    }
+  }
+       
+}
