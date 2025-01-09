@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { LangaugeService } from './services/langauge/langauge.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +15,11 @@ export class AppComponent {
   currentLang = 'ar';
   activePopover: string | null = null;
   department :string | null = 'myPermits'
-  constructor() {
+  constructor( private languageService:LangaugeService ,private translate: TranslateService) {
+    this.translate.onLangChange.subscribe(event => {
+      console.log('Language changed to:', event.lang);
+     
+    });
   }
   
   toggleSidebar() {
@@ -31,14 +37,28 @@ export class AppComponent {
       this.activeDeparment(popover)  
     }
 
-    
-    switchLanguage(lang: string) { 
-      console.log(`Switching to ${lang}`); 
-      this.currentLang = lang;
+    togglePopoverSide(event: Event, popover: string) {
+      event.stopPropagation();
+      this.activePopover = this.activePopover === popover ? null : popover; 
     }
+
+    switchLanguage(lang: string) {
+      this.languageService.setLanguage(lang);
+      this.currentLang = lang;
+      this.isSidebarOpen = false;
+    }
+   
 
     activeDeparment(depart: string) { 
       this.department  = depart 
+      if(this.isSidebarOpen == true){
+        this.isSidebarOpen = false; 
+      }
+    }
+
+    selectItem(item: string) {
+      this.department = item;
+      this.isSidebarOpen = false;
     }
   
     

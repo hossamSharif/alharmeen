@@ -1,14 +1,14 @@
 <div class="top-section">
     <div class="breadcrumb">
-        <a><span>خدماتي</span></a>
+        <a><span>{{ 'BREADCRUMB.SERVICES' | translate }}</span></a>
         <span class="separator"> > </span>
-        <a><span>زيارة معارض الحرمين </span></a>
+        <a><span>{{ 'BREADCRUMB.EXHIBITION_VISIT' | translate }}</span></a>
         <span class="separator"> > </span>
-        <a><span class="active">تصاريحي</span></a>
+        <a><span class="active">{{ 'BREADCRUMB.MY_PERMITS' | translate }}</span></a>
     </div> 
     <div class="title-container">
-        <div class="title"> تصاريحي <br>
-            <p>جميع البيانات ومعلومات التصاريح الخاصة بحسابي </p>
+         <div class="title"> {{ 'PAGE_TITLE.PERMITS' | translate }} <br>
+            <p>{{ 'PAGE_TITLE.SUBTITLE' | translate }}</p>
         </div>
     </div> 
 </div>
@@ -41,20 +41,20 @@
                     <tr>
                         <th class="checkbox-column">
                             <input type="checkbox" class="checkbox-input">
-                        </th>
-                        <th>رقم التصريح</th>
-                        <th>نوع الزيارة</th>
-                        <th> اسم الجهة / الشخض</th>
-                        <th>تاريخ الزيارة   
+                        </th> 
+                        <th>{{ 'PERMITS_TABLE.PERMIT_NUMBER' | translate }}</th>
+                        <th>{{ 'PERMITS_TABLE.VISIT_TYPE' | translate }}</th>
+                        <th>{{ 'PERMITS_TABLE.VISITOR_NAME' | translate }}</th>
+                        <th>{{ 'PERMITS_TABLE.VISIT_DATE' | translate }}
                             <span *ngIf="isSorted">↑</span>
-                             <span *ngIf="!isSorted">↓</span>
+                            <span *ngIf="!isSorted">↓</span>
                         </th>
-                        <th>وقت الزيارة </th>
-                        <th>عدد الحافلات </th>
-                        <th>حالة الحجز</th>
-                        <th class="actions-column">الزوار </th>
-                        <th class="actions-column">بطاقة دخول المعرض</th>
-                        <th class="actions-column">إلغاء الحجز</th>
+                        <th>{{ 'PERMITS_TABLE.VISIT_TIME' | translate }}</th>
+                        <th>{{ 'PERMITS_TABLE.BUS_COUNT' | translate }}</th>
+                        <th>{{ 'PERMITS_TABLE.STATUS' | translate }}</th>
+                        <th class="actions-column">{{ 'PERMITS_TABLE.VISITORS' | translate }}</th>
+                        <th class="actions-column">{{ 'PERMITS_TABLE.ENTRY_CARD' | translate }}</th>
+                        <th class="actions-column">{{ 'PERMITS_TABLE.CANCEL_BOOKING' | translate }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,8 +62,8 @@
                         <td colspan="8" class="no-results-cell">
                           <div class="no-results-content">
                             <i class="fas fa-search"></i>
-                            <h3>لا توجد نتائج</h3>
-                            <p>لم يتم العثور على تصاريح مطابقة لبحثك</p>
+                            <h3>{{ 'PERMITS_TABLE.NO_PERMITS' | translate }}</h3>
+                            <p>{{ 'PERMITS_TABLE.NO_PERMITS_DESC' | translate }}</p>
                           </div>
                         </td>
                     </tr>
@@ -83,8 +83,8 @@
                                 <span class="status-text">{{item.status}}</span>
                             </div>
                         </td>
-                        <td class="actions-column"> <a> بيانات الزوار</a></td>
-                        <td class="actions-column"> <a (click)="openTicketModal(item)"> عرض التذكرة </a> </td>
+                        <td class="actions-column"> <a> {{'PERMITS_TABLE.VISITOR_DATA' | translate}}</a></td>
+                        <td class="actions-column"> <a (click)="openTicketModal(item)"> {{'PERMITS_TABLE.VIEW_TICKET' | translate}}</a> </td>
                         <td class="actions-column">
                             <div class="tooltip-wrapper">
                                 <button class="round-button">
@@ -92,12 +92,12 @@
                                 </button>
                                 <div class="custom-tooltip" *ngIf="item.status == 'مؤكد'">
                                     <div class="tooltip-icon status-confirmed">!</div>
-                                    <span class="tooltip-text"> يسمح بإلغاء الحجز علي ان يكون قبل الرحل بساعتين
-                                        فقط</span>
+                                    <span class="tooltip-text"> {{'PERMITS_TABLE.CANCEL_NOTE' | translate}}
+                                        </span>
                                 </div>
                                 <div class="custom-tooltip" *ngIf="item.status == 'منتهي'">
                                     <div class="tooltip-icon status-ended">!</div>
-                                    <span class="tooltip-text"> تم انتهاء فترة الإلغاء </span>
+                                    <span class="tooltip-text"> {{'PERMITS_TABLE.CANCEL_ENDED' | translate}}</span>
                                 </div>
                             </div>
                         </td> 
@@ -113,13 +113,14 @@
 <div class="modal-overlay" [class.show]="showTicketModal" (click)="closeModal()"  >
     <div class="modal-content" (click)="$event.stopPropagation()">
         <div class="modal-header">
-            <span> تصريح زيارة </span>
+            <span>{{ 'TICKET_MODAL.TITLE' | translate }}</span>
             <button class="close-btn" (click)="closeModal()">×</button>
         </div>
+        
         <div class="modal-toolbar">
             <div>
-                <button class="langBtnArabic"> عربي </button>
-                <button class="langBtnEnglish"> English </button>
+                <button (click)="switchLanguage('ar')" class="langBtnArabic">{{ 'TICKET_MODAL.LANGUAGE.ARABIC' | translate }}</button>
+            <button (click)="switchLanguage('en')" class="langBtnEnglish">{{ 'TICKET_MODAL.LANGUAGE.ENGLISH' | translate }}</button>
             </div>
             <button class="icon-btn" (click)="printTicket()">
                <app-icon  name="print"></app-icon>
@@ -128,8 +129,8 @@
 
         <div class="ticket-card"  id="print-ticket"> 
             <div class="ticket-header">
-                <label> تصريح زيارة </label> <br>
-                <h2> المعرض التراثي لمكتبة الحرم المكي </h2>
+                <label>{{ 'TICKET_MODAL.TITLE' | translate }}</label><br>
+                <h2>{{ 'TICKET_MODAL.EXHIBITION_NAME' | translate }}</h2>
             </div> 
 
             <div class="ticket-content">
@@ -143,14 +144,14 @@
                       <span class="permit-number">{{selectedTicket?.permitNumber}}</span>
                     </div>
                     <div class="visitor-info">
-                        <label class="info-label">الاسم</label>
+                        <label class="info-label">  {{ 'TICKET_MODAL.VISITOR_INFO.NAME' | translate }} </label>
                         <span class="info-value">{{selectedTicket?.visitorName}}</span>
                     </div>
                 </div>
 
                 <div class="terms-link"   [ngClass]="{'d-none': printMode === true , 'terms-link': printMode === false }">
                     <a>
-                        الشروط والأحكام
+                        {{ 'TICKET_MODAL.FOOTER.TERMS' | translate }}
                         <app-icon name="open"></app-icon>
                     </a>
                 </div>
@@ -160,27 +161,27 @@
             <div class="ticket-info">
                 <div class="info-row">
                     <div class="input-group">
-                        <label>رقم التصريح</label>
+                        <label>{{ 'TICKET_MODAL.VISITOR_INFO.PERMIT_NUMBER' | translate }}</label>
                         <input type="text" value="{{selectedTicket?.permitNumber}}" >
                     </div>
                     <div class="input-group">
-                        <label>نوع الزيارة</label>
+                        <label>{{ 'TICKET_MODAL.VISITOR_INFO.VISIT_TYPE' | translate }}</label>
                         <input type="text" value="{{selectedTicket?.visitType}}" >
                     </div>
                     <div class="input-group">
-                        <label>تاريخ الزيارة</label>
+                        <label>{{ 'TICKET_MODAL.VISITOR_INFO.VISIT_DATE' | translate }}</label>
                         <input type="text" value="{{selectedTicket?.visitDate}}" >
                     </div>
                     <div class="input-group">
-                        <label>وقت الزيارة</label>
+                        <label>{{ 'TICKET_MODAL.VISITOR_INFO.VISIT_TIME' | translate }}</label>
                         <input type="text" value="{{selectedTicket?.visitTime}}" > 
                     </div>
                     <div class="input-group">
-                        <label>عدد الحافلات</label>
+                        <label>{{ 'TICKET_MODAL.VISITOR_INFO.BUS_COUNT' | translate }}</label>
                         <input type="text" value="{{selectedTicket?.busCount}}" >
                     </div>
                     <div class="input-group">
-                        <label>عدد الزوار</label>
+                        <label>{{ 'TICKET_MODAL.VISITOR_INFO.VISITORS_COUNT' | translate }}</label>
                         <input type="text" value="{{selectedTicket?.visitorsCount}}" >
                     </div>
                 </div>
@@ -197,14 +198,14 @@
 
                 <div class="footer-info">
                     <div  [ngClass]="{'d-none': printMode === true , 'location-info': printMode === false }" >
-                        <label>موقع المعرض: </label>
+                        <label>{{ 'TICKET_MODAL.FOOTER.LOCATION' | translate }}: </label>
                         <a href="#" class="map-link">
                             إضغط هنا
                             <app-icon name="pin"></app-icon>
                         </a>
                     </div>
                     <div class="email-info">
-                        <label>بريد التواصل: exibit@gph.gov.sa</label>
+                        <label>{{ 'TICKET_MODAL.FOOTER.CONTACT_EMAIL' | translate }}: exibit@gph.gov.sa</label>
                     </div>
                 </div>
             </div> 

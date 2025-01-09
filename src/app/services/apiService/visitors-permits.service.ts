@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { PERMITS_DATA } from './mock-permits';
+import { PERMITS_DATA } from '../../visitors-permits/mock-permits';
 
 @Injectable({
   providedIn: 'root'

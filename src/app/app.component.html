@@ -6,35 +6,35 @@
 <!-- Sidebar for Mobile -->
 <div class="sidebar" [class.active]="isSidebarOpen">
   <div class="sidebar-header">
-    <img alt="Alharamain Logo" src="./assets/images/AlharamainW.png" />
-     
+    <img alt="Alharamain Logo" src="./assets/images/AlharamainW.png" /> 
   </div>
 
   <div class="sidebar-content"> 
     <nav class="sidebar-nav">
       <div class="nav-link"  [ngClass]="{'active': department === 'myServices'}"  (click)="activeDeparment('myServices')">
         <a routerLink="">
-          <strong>خدماتي</strong>
+          <strong>{{  'NAV.SERVICES'  | translate  }}</strong>
         </a>
       </div>
       <div class="nav-link" [ngClass]="{'active': department === 'myPermits'}"  (click)="activeDeparment('myPermits')">
         <a routerLink="/Permits">
-          <strong>تصريحاتي</strong>
+          <strong>{{ 'NAV.PERMITS' | translate }}</strong>
         </a>
       </div>
       <div class="nav-link" [ngClass]="{'active': department === 'myTransactions'}" (click)="activeDeparment('myTransactions')" >
         <a routerLink="">
-          <strong>معاملاتي</strong>
+          <strong>{{ 'NAV.TRANSACTIONS' | translate }}</strong>
         </a>
       </div>
     </nav>
 
     <!-- Icon Navigation -->
     <nav class="sidebar-icons">
-      <div class="nav-link" [ngClass]="{'active':  activePopover === 'langauge'}" (click)="togglePopover($event, 'langauge')" >
+      <div class="nav-link" [ngClass]="{'active':  activePopover === 'langauge'}" (click)="togglePopoverSide($event, 'langauge')" >
         <a routerLink=""> 
           <app-icon name="language"></app-icon>
-          <span>اللغة</span>
+          <span>  {{  'HEADER.LANGUAGE'  | translate  }} </span>
+          
         </a>
         <div class="popover langauge-popover" [ngClass]="{'show': activePopover === 'langauge'}">
           <button class="popover-btn" [ngClass]="{'active': currentLang === 'ar'}" (click)="switchLanguage('ar')">العربية</button>
@@ -42,10 +42,10 @@
         </div>
       </div>
   
-      <div class="nav-link" [ngClass]="{'active':  activePopover === 'notifications'}" (click)="togglePopover($event, 'notifications')">
+      <div class="nav-link" [ngClass]="{'active':  activePopover === 'notifications'}" (click)="togglePopoverSide($event, 'notifications')">
         <a routerLink="" > 
           <app-icon name="notifications"></app-icon> 
-          <span>الإشعارات</span>
+          <span> {{'HEADER.NOTIFICATIONS' | translate}}</span>
         </a>
         <div class="popover notifications-popover" [ngClass]="{'show': activePopover === 'notifications'}">
          
@@ -60,42 +60,41 @@
         </div>
       </div>
   
-      <div class="nav-link"  [ngClass]="{'active':  activePopover === 'search'}" (click)="togglePopover($event, 'search')">
+      <div class="nav-link"  [ngClass]="{'active':  activePopover === 'search'}" (click)="togglePopoverSide($event, 'search')">
         <a routerLink=""> 
           <app-icon name="search"></app-icon> 
-          <span>البحث</span>
+          <span> {{'HEADER.SEARCH' | translate}}</span>
         </a>
         <div class="popover search-popover" [ngClass]="{'show': activePopover === 'search'}">
           <div class="search-container">
-            <input type="text" placeholder="ابحث هنا...">
-            <button class="search-btn">
+            <input type="text"  [placeholder]="'HEADER.SEARCH_PLACEHOLDER' | translate">
+            <button class="search-btn" (click)="selectItem('search')">
               <app-icon name="search"></app-icon>
             </button>
           </div>
         </div>
       </div>
   
-      <div class="nav-link"  [ngClass]="{'active':  activePopover === 'profile'}"  (click)="togglePopover($event, 'profile')">
+      <div class="nav-link"  [ngClass]="{'active':  activePopover === 'profile'}"  (click)="togglePopoverSide($event, 'profile')">
         <a routerLink="" > 
           <app-icon name="person"></app-icon> 
-          <span>  <label>الملف الشخصي</label> </span>
+          <span>  <label>  {{'HEADER.PROFILE' | translate}}  </label> </span>
         </a> 
         <div class="popover profile-popover" [ngClass]="{'show': activePopover === 'profile'}">
           
           <div class="profile-menu">
-            <button class="popover-btn">الملف الشخصي</button>
-            <button class="popover-btn">تغيير كلمة المرور</button>
-            <button class="popover-btn">تسجيل الخروج</button>
+            <button class="popover-btn" (click)="selectItem('profile')">   {{'HEADER.PROFILE_MENU.VIEW_PROFILE' | translate}} </button>
+            <button class="popover-btn" (click)="selectItem('profile')">      {{'HEADER.PROFILE_MENU.CHANGE_PASSWORD' | translate}} </button>
+            <button class="popover-btn" (click)="selectItem('profile')">    {{'HEADER.PROFILE_MENU.LOGOUT' | translate}} </button>
           </div>
         </div>
       </div>
   
-      <div class="nav-link"  [ngClass]="{'active':  activePopover === 'settings'}" (click)="togglePopover($event, 'settings')"> 
+      <div class="nav-link"  [ngClass]="{'active':  activePopover === 'settings'}" (click)="togglePopoverSide($event, 'settings')"> 
         <a routerLink=""> 
           <app-icon name="settings"></app-icon>
-          <span>الإعدادات</span>
-        </a>
-        
+          <span> {{'HEADER.SETTINGS' | translate}} </span>
+        </a> 
         <!-- <div class="popover settings-popover" [ngClass]="{'show': activePopover === 'settings'}">
           
           <div class="profile-menu">
@@ -119,17 +118,17 @@
   <nav class="navigation-menu" >
     <div class="nav-link"  [ngClass]="{'active': department === 'myServices'}"  (click)="activeDeparment('myServices')">
       <a routerLink="">
-        <strong>خدماتي</strong>
+        <strong>{{  'NAV.SERVICES'  | translate  }}</strong>
       </a>
     </div>
     <div class="nav-link" [ngClass]="{'active': department === 'myPermits'}"  (click)="activeDeparment('myPermits')">
       <a routerLink="/Permits">
-        <strong>تصريحاتي</strong>
+        <strong>{{ 'NAV.PERMITS' | translate }}</strong>
       </a>
     </div>
     <div class="nav-link" [ngClass]="{'active': department === 'myTransactions'}" (click)="activeDeparment('myTransactions')" >
       <a routerLink="">
-        <strong>معاملاتي</strong>
+        <strong>{{ 'NAV.TRANSACTIONS' | translate }}</strong>
       </a>
     </div>
   </nav> 
@@ -185,9 +184,9 @@
       <div class="popover profile-popover" [ngClass]="{'show': activePopover === 'profile'}">
         
         <div class="profile-menu">
-          <button class="popover-btn">الملف الشخصي</button>
-          <button class="popover-btn">تغيير كلمة المرور</button>
-          <button class="popover-btn">تسجيل الخروج</button>
+          <button class="popover-btn" (click)="selectItem('profile')">   {{'HEADER.PROFILE_MENU.VIEW_PROFILE' | translate}} </button>
+            <button class="popover-btn" (click)="selectItem('profile')">      {{'HEADER.PROFILE_MENU.CHANGE_PASSWORD' | translate}} </button>
+            <button class="popover-btn" (click)="selectItem('profile')">    {{'HEADER.PROFILE_MENU.LOGOUT' | translate}} </button>
         </div>
       </div>
     </div>
@@ -206,6 +205,7 @@
       </div>
     </div>
   </nav>  
+  
 </div>
 
 
@@ -214,54 +214,54 @@
   <div class="footer" role="contentinfo">
     <div class="tree-section">
       <div class="footer-section">
-        <h3 class="footer-title">عن الرئاسة</h3>
-        <div class="divider"></div>
-        <div class="footer-links">
-          <a href="#"> عن البوابة </a>
-          <a href="#"> دليل المستخدم </a>
-          <a href="#"> الأخبار </a>
-          <a href="#"> الفعاليات </a>
-        </div>
+        <h3 class="footer-title">{{ 'FOOTER.ABOUT.TITLE' | translate }}</h3>
+      <div class="divider"></div>
+      <div class="footer-links">
+        <a href="#">{{ 'FOOTER.ABOUT.ABOUT_PORTAL' | translate }}</a>
+        <a href="#">{{ 'FOOTER.ABOUT.USER_GUIDE' | translate }}</a>
+        <a href="#">{{ 'FOOTER.ABOUT.NEWS' | translate }}</a>
+        <a href="#">{{ 'FOOTER.ABOUT.EVENTS' | translate }}</a>
       </div>
+    </div>
+  
+    <div class="footer-section">
+      <h3 class="footer-title">{{ 'FOOTER.IMPORTANT_LINKS.TITLE' | translate }}</h3>
+      <div class="divider"></div>
+      <div class="footer-links">
+        <a href="#">{{ 'FOOTER.IMPORTANT_LINKS.HARAMAIN_AUTHORITY' | translate }}</a>
+        <a href="#">{{ 'FOOTER.IMPORTANT_LINKS.HARAMAIN_APP' | translate }}</a>
+        <a href="#">{{ 'FOOTER.IMPORTANT_LINKS.HAJJ_MINISTRY' | translate }}</a>
+        <a href="#">{{ 'FOOTER.IMPORTANT_LINKS.NUSK_PLATFORM' | translate }}</a>
+        <a href="#">{{ 'FOOTER.IMPORTANT_LINKS.NATIONAL_PLATFORM' | translate }}</a>
+        <a href="#">{{ 'FOOTER.IMPORTANT_LINKS.DIGITAL_GOVERNANCE' | translate }}</a>
+        <a href="#">{{ 'FOOTER.IMPORTANT_LINKS.VISION_2030' | translate }}</a>
+      </div>
+    </div>
+  
+    <div class="footer-section">
+      <h3 class="footer-title">{{ 'FOOTER.SUPPORT.TITLE' | translate }}</h3>
+      <div class="divider"></div>
+      <div class="footer-links">
+        <a href="#">{{ 'FOOTER.SUPPORT.CONTACT_US' | translate }}</a>
+        <a href="#">{{ 'FOOTER.SUPPORT.COMPLAINTS' | translate }}</a>
+        <a href="#">{{ 'FOOTER.SUPPORT.SERVICE_AGREEMENT' | translate }}</a>
+        <a href="#">{{ 'FOOTER.SUPPORT.NEWSLETTER' | translate }}</a>
+      </div>
+    </div>
   
       <div class="footer-section">
-        <h3 class="footer-title">روابط مهمة</h3>
-        <div class="divider"></div>
-        <div class="footer-links">
-          <a href="#"> الهيئة العامة للعناية بشؤون الحرمين </a>
-          <a href="#"> تطبيق الحرمين </a>
-          <a href="#">وزارة الحج و العمرة</a>
-          <a href="#"> منصة نسك </a>
-          <a href="#"> المنصة الوطنية الموحدة </a>
-          <a href="#"> هسيئ الحوكمة الرقمية </a>
-          <a href="#"> رؤية السعودية 2030 </a>
-        </div>
-      </div>
-  
-      <div class="footer-section">
-        <h3 class="footer-title">الدعم الفني</h3>
-        <div class="divider"></div>
-        <div class="footer-links">
-          <a href="#">تواصل معنا </a>
-          <a href="#"> الشكاوي والمقترحات </a>
-          <a href="#"> اتفاقية مستوي الخدمة </a>
-          <a href="#"> الإشتراك في النشر البريدية </a>
-        </div>
-      </div>
-  
-      <div class="footer-section">
-        <h3 class="footer-title">تواصل معنا</h3>
+        <h3 class="footer-title">{{ 'FOOTER.CONTACT.TITLE' | translate }}</h3>
         <div class="divider"></div>
         <div class="footer-media">
-          <button class="btn btn-primary"> <a href="#"><app-icon name="twitter"></app-icon></a> </button>
-          <button><a href="#"><app-icon name="facebook"></app-icon></a> </button>
-          <button> <a href="#"><app-icon name="linkedin"></app-icon></a> </button>
-          <button><a href="#"><app-icon name="youtube"></app-icon></a> </button>
+          <button class="btn btn-primary"><a href="#"><app-icon name="twitter"></app-icon></a></button>
+          <button><a href="#"><app-icon name="facebook"></app-icon></a></button>
+          <button><a href="#"><app-icon name="linkedin"></app-icon></a></button>
+          <button><a href="#"><app-icon name="youtube"></app-icon></a></button>
         </div>
   
-        <h3 class="footer-title mgt20"> ادوات الإتاحة والوصول</h3>
+        <h3 class="footer-title mgt20">{{ 'FOOTER.CONTACT.ACCESSIBILITY' | translate }}</h3>
         <div class="divider"></div>
-        <div class="footer-media ">
+        <div class="footer-media">
           <button><a href="#"><app-icon name="search"></app-icon></a></button>
           <button><a href="#"><app-icon name="eye"></app-icon></a></button>
         </div>
@@ -272,13 +272,13 @@
     <div class="terms-container">
       <div class="terms-links">
         <div class="links-row">
-          <a href="#">سياسة الخصوصية</a>
+          <a href="#">{{ 'FOOTER.TERMS.PRIVACY' | translate }}</a>
           <span class="separator">|</span>
-          <a href="#">شروط الاستخدام</a>
+          <a href="#">{{ 'FOOTER.TERMS.TERMS_OF_USE' | translate }}</a>
           <span class="separator">|</span>
-          <a href="#">خريطة الموقع</a>
+          <a href="#">{{ 'FOOTER.TERMS.SITEMAP' | translate }}</a>
         </div>
-        <p class="copyright">جميع الحقوق محفوظة © 2024 رئاسة شؤون الحرمين</p>
+        <p class="copyright">{{ 'FOOTER.TERMS.COPYRIGHT' | translate }}</p>
       </div>
   
       <div class="logos">
@@ -286,8 +286,6 @@
         <img src="./assets/images/v2030.png" alt="Alharamain Logo" />
       </div>
     </div>
-  
-  
   </div>
 </div>
 

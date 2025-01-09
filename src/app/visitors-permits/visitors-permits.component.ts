@@ -1,8 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { fromEvent, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
-import { VisitorsPermitsService } from './visitors-permits.service';
+import { VisitorsPermitsService } from '../services/apiService/visitors-permits.service';
 import html2canvas from 'html2canvas';
+import { TranslateService } from '@ngx-translate/core';
+import { LangaugeService } from '../services/langauge/langauge.service';
 
 
 @Component({
@@ -29,14 +31,28 @@ export class VisitorsPermitsComponent implements OnInit {
 
   printMode: boolean = false;
    
-  constructor(private visitorService: VisitorsPermitsService) {
+  constructor( private languageService:LangaugeService ,private visitorService: VisitorsPermitsService ,private translate: TranslateService) {
+    this.translate.onLangChange.subscribe(event => {
+      console.log('Language changed to:', event.lang);
      
+    });
    }
 
   ngOnInit(): void { 
     this.loadPermits();
+    // Subscribe to language changes
+    this.translate.onLangChange.subscribe((lan:any) => {
+      // Trigger any necessary updates when language changes
+      console.log(lan ,'Language changed');
+      this.loadPermits();
+    });
+    
   }
 
+  switchLanguage(lang: string) {
+    this.languageService.setLanguage(lang); 
+  }
+ 
 
   loadPermits() {
     this.loading = true;
@@ -179,7 +195,7 @@ export class VisitorsPermitsComponent implements OnInit {
     }
   }
   
-  
+ 
 
   printTicket() {
     // Set print mode first

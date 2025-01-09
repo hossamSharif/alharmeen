@@ -1,0 +1,120 @@
+{
+    "NAV": {
+        "SERVICES": "خدماتي",
+        "PERMITS": "تصريحاتي",
+        "TRANSACTIONS": "معاملاتي"
+    },
+    "HEADER": {
+        "LANGUAGE": "اللغة",
+        "NOTIFICATIONS": "الإشعارات",
+        "SEARCH": "البحث",
+        "PROFILE": "الملف الشخصي",
+        "SETTINGS": "الإعدادات",
+        "SEARCH_PLACEHOLDER": "ابحث هنا...",
+        "NOTIFICATIONS_TITLE": "الإشعارات",
+        "NOTIFICATION_1": "تم قبول طلب التصريح",
+        "NOTIFICATION_2": "تم تحديث حالة الطلب",
+        "TIME_AGO_1": "منذ ساعتين",
+        "TIME_AGO_2": "منذ 3 ساعات",
+        "PROFILE_MENU": {
+            "VIEW_PROFILE": "الملف الشخصي",
+            "CHANGE_PASSWORD": "تغيير كلمة المرور",
+            "LOGOUT": "تسجيل الخروج"
+        }
+       
+    },
+    "FOOTER": {
+        "ABOUT": {
+            "TITLE": "عن الرئاسة",
+            "ABOUT_PORTAL": "عن البوابة",
+            "USER_GUIDE": "دليل المستخدم",
+            "NEWS": "الأخبار",
+            "EVENTS": "الفعاليات"
+        },
+        "IMPORTANT_LINKS": {
+            "TITLE": "روابط مهمة",
+            "HARAMAIN_AUTHORITY": "الهيئة العامة للعناية بشؤون الحرمين",
+            "HARAMAIN_APP": "تطبيق الحرمين",
+            "HAJJ_MINISTRY": "وزارة الحج والعمرة",
+            "NUSK_PLATFORM": "منصة نسك",
+            "NATIONAL_PLATFORM": "المنصة الوطنية الموحدة",
+            "DIGITAL_GOVERNANCE": "هيئة الحوكمة الرقمية",
+            "VISION_2030": "رؤية السعودية 2030"
+        },
+        "SUPPORT": {
+            "TITLE": "الدعم الفني",
+            "CONTACT_US": "تواصل معنا",
+            "COMPLAINTS": "الشكاوي والمقترحات",
+            "SERVICE_AGREEMENT": "اتفاقية مستوى الخدمة",
+            "NEWSLETTER": "الإشتراك في النشرة البريدية"
+        },
+        "CONTACT": {
+            "TITLE": "تواصل معنا",
+            "ACCESSIBILITY": "أدوات الإتاحة والوصول"
+        },
+        "TERMS": {
+            "PRIVACY": "سياسة الخصوصية",
+            "TERMS_OF_USE": "شروط الاستخدام",
+            "SITEMAP": "خريطة الموقع",
+            "COPYRIGHT": "جميع الحقوق محفوظة © 2024 رئاسة شؤون الحرمين"
+        }
+    },
+    "PERMITS_TABLE": {
+        "PERMIT_NUMBER": "رقم التصريح",
+        "VISIT_TYPE": "نوع الزيارة",
+        "VISITOR_NAME": "اسم الجهة / الشخص",
+        "VISIT_DATE": "تاريخ الزيارة",
+        "VISIT_TIME": "وقت الزيارة",
+        "BUS_COUNT": "عدد الحافلات",
+        "STATUS": "حالة الحجز",
+        "VISITORS": "الزوار",
+        "ENTRY_CARD": "بطاقة دخول المعرض",
+        "CANCEL_BOOKING": "إلغاء الحجز",
+        "VISITOR_DATA": "بيانات الزوار",
+        "VIEW_TICKET": "عرض التذكرة",
+        "CANCEL_NOTE": "يسمح بإلغاء الحجز علي ان يكون قبل الرحل بساعتين فقط",
+        "CANCEL_ENDED": "تم انتهاء فترة الإلغاء" ,
+        "NO_PERMITS": "لا يوجد تصاريح",
+        "NO_PERMITS_DESC": "لم يتم العثور على تصاريح مطابقة لبحثك "
+        
+    }, 
+"BREADCRUMB": {
+    "SERVICES": "خدماتي",
+    "EXHIBITION_VISIT": "زيارة معارض الحرمين",
+    "MY_PERMITS": "تصاريحي"
+  },
+  "PAGE_TITLE": {
+    "PERMITS": "تصاريحي",
+    "SUBTITLE": "جميع البيانات ومعلومات التصاريح الخاصة بحسابي"
+  },
+  "TOOLBAR": {
+    "SEARCH": "بحث...",
+    "PRINT": "طباعة",
+    "FILTER": "تصفية",
+    "SORT": "ترتيب"
+  },
+  "TICKET_MODAL": {
+    "TITLE": "تصريح زيارة",
+    "EXHIBITION_NAME": "المعرض التراثي لمكتبة الحرم المكي",
+    "LANGUAGE": {
+      "ARABIC": "عربي",
+      "ENGLISH": "English"
+    },
+    "VISITOR_INFO": {
+      "NAME": "الاسم",
+      "PERMIT_NUMBER": "رقم التصريح",
+      "VISIT_TYPE": "نوع الزيارة",
+      "VISIT_DATE": "تاريخ الزيارة",
+      "VISIT_TIME": "وقت الزيارة",
+      "BUS_COUNT": "عدد الحافلات",
+      "VISITORS_COUNT": "عدد الزوار"
+    },
+    "FOOTER": {
+      "LOCATION": "موقع المعرض",
+      "CLICK_HERE": "إضغط هنا",
+      "CONTACT_EMAIL": "بريد التواصل",
+      "TERMS": "الشروط والأحكام"
+    }
+  }
+   
+}
