@@ -12,7 +12,7 @@ export const PERMITS_DATA = [
       {
         permitNumber: '667679839',
         visitType: 'معارض الحرمين',
-        visitorName: 'يزن بن محمد حسن    ',
+        visitorName: 'يزن بن محمد حسن ',
         visitDate: '2023-12-10',
         visitTime: '02:30 م',
         busCount: 1,

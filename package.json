@@ -24,6 +24,7 @@
     "angularx-qrcode": "^14.0.0",
     "html2canvas": "^1.4.1",
     "jsbarcode": "^3.11.6",
+    "protractor": "^7.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -9,10 +9,16 @@ export class LangaugeService {
   private currentLang = new BehaviorSubject<string>('ar');
 
   constructor(private translate: TranslateService) {
-    this.translate.setDefaultLang('ar');
-    this.translate.use('ar');
+    
+  }
+  ngOnInit() {
+    this.setDefaultLang('ar')
   }
 
+  setDefaultLang(defalt:string) {
+    this.translate.setDefaultLang(defalt);
+    this.translate.use('ar');
+  }
   setLanguage(lang: string) {
     this.translate.use(lang);
     this.currentLang.next(lang);

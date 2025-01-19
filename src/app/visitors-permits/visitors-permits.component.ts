@@ -63,6 +63,10 @@ export class VisitorsPermitsComponent implements OnInit {
   }
  
   ngAfterViewInit() {
+   this.searchPermit();
+  }
+ 
+  searchPermit(){
     fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
       map((event: any) => event.target.value),
       debounceTime(400),
@@ -74,7 +78,7 @@ export class VisitorsPermitsComponent implements OnInit {
       this.loading = false;
     });
   }
- 
+
   sortByDate() {
     if (!this.isSorted) {
       // Sort ascending
@@ -230,7 +234,7 @@ export class VisitorsPermitsComponent implements OnInit {
             });
         }
     }, 100); // Small delay to ensure DOM updates
-}
+  }
 
 
    
